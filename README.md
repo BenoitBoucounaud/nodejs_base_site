@@ -15,4 +15,5 @@ npm run start \\ launch fontend
 - In backend run 
 ```
 npm install -g nodemon \\ permit to not relaunch server at any updates
+npm install express
 ```
