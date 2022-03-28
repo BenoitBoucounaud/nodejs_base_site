@@ -1,9 +1,19 @@
 const express = require('express');
 const app = express();
 
+app.use(express.json()); // parses incoming JSON requests and puts the parsed data in req.body.
+
 app.use((req, res, next) =>{
     console.log('Request received!');
     next();
+});
+
+// put POST middlewares before GET requests (but write with 'use') to catch POST requests and not allow them to touch GET middlewares
+app.post('/api/stuff', (req, res, next) => {
+  console.log(req.body);
+  res.status(201).json({
+    message: 'Objet créé !'
+  });
 });
 
 app.use((req, res, next) => {
