@@ -2,6 +2,13 @@
 
 App to learn node js
 
-Need to dl node first
 
-https://nodejs.dev/learn
+Steps to init : 
+- Install Node : https://nodejs.dev/learn
+- In frontend run 
+```
+git clone https://github.com/OpenClassrooms-Student-Center/go-fullstack-v3-fr.git frontend \\ clone the frontend
+cd frontend
+npm install \\ install all dependencies
+npm run start \\ launch fontend
+```
