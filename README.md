@@ -7,9 +7,9 @@ App to learn node js
 #### Node
 https://nodejs.dev/learn
 #### MongoDB
-Create a free cluster named 'Cluster' from [Mongo's web site](https://www.mongodb.com/try?initial=true#community) with MongoDB Atlas
-User : user
-Password : edtX1Z9caAFzc4Jt
+Create a free cluster named 'Cluster' from [Mongo's web site](https://www.mongodb.com/try?initial=true#community) with MongoDB Atlas  
+User : user  
+Password : edtX1Z9caAFzc4Jt  
 When your cluster is created you can allow any IP adress to acces it in 'Network acces' -> 'add IP adress' -> 'Add access from anywhere'  
 
 Install mongoose with : 
