@@ -1,5 +1,14 @@
+const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
+
+mongoose.connect('mongodb+srv://User:edtX1Z9caAFzc4Jt@cluster.icjcw.mongodb.net/Cluster?retryWrites=true&w=majority',
+{
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(() => console.log('Connected to MongoDB'))
+.catch(() => console.log('Connection to MongoDB failed'));
 
 app.use(express.json()); // parses incoming JSON requests and puts the parsed data in req.body.
 
