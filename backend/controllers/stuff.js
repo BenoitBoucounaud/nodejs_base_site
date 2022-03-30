@@ -1,9 +1,12 @@
 const Thing = require('../models/thing');
 
 exports.createThing = (req, res, next) => {
-    delete req.body._id;
+    // thing is object so we need to parse it to use it
+    const thingObject = JSON.parse(req.body.thing);
+    delete thingObject._id;
     const thing = new Thing({
-        ...req.body // '...' is used to copy all elements from 'req.body'
+        ...thingObject, // '...' is used to copy all elements from 'thingObject'
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
     thing.save() // return a Promise
         .then(() => res.status(201).json({ message: 'Object saved' }))
@@ -17,7 +20,13 @@ exports.getThing = (req, res, next) => {
 };
 
 exports.updateThing = (req, res, next) => {
-    Thing.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+    // if we need to catch url or not
+    const thingObject = req.file ? {
+        ...JSON.parse(req.body.thing),
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } : { ...req.body };
+
+    Thing.updateOne({ _id: req.params.id }, { ...thingObject, _id: req.params.id })
         .then(() => res.status(200).json({ message: 'Object updated' }))
         .catch(() => res.status(400).json({ error }));
 };

@@ -5,14 +5,16 @@ const app = express();
 const stuffRoutes = require('./routes/stuff');
 const userRoutes = require('./routes/user');
 
+const path = require('path');
+
 // MongoDB connection
 mongoose.connect('mongodb+srv://User:edtX1Z9caAFzc4Jt@cluster.icjcw.mongodb.net/Cluster?retryWrites=true&w=majority',
-{
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => console.log('Connected to MongoDB'))
-.catch(() => console.log('Connection to MongoDB failed'));
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(() => console.log('Connection to MongoDB failed'));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*'); // allow acces to this app from anywhere
@@ -22,15 +24,16 @@ app.use((req, res, next) => {
 });
 
 // parses incoming JSON requests and puts the parsed data in req.body.
-app.use(express.json()); 
+app.use(express.json());
 
 // Routes
 app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Trigger if nothing else is
 app.use((req, res, next) => {
-    res.json({ message : 'Wrong request'});
+    res.json({ message: 'Wrong request' });
     next();
 });
 
