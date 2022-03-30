@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 
 const stuffRoutes = require('./routes/stuff');
+const userRoutes = require('./routes/user');
 
 // MongoDB connection
 mongoose.connect('mongodb+srv://User:edtX1Z9caAFzc4Jt@cluster.icjcw.mongodb.net/Cluster?retryWrites=true&w=majority',
@@ -23,8 +24,9 @@ app.use((req, res, next) => {
 // parses incoming JSON requests and puts the parsed data in req.body.
 app.use(express.json()); 
 
-// Stuff routing
+// Routes
 app.use('/api/stuff', stuffRoutes);
+app.use('/api/auth', userRoutes);
 
 // Trigger if nothing else is
 app.use((req, res, next) => {
