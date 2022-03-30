@@ -6,25 +6,39 @@ exports.createThing = (req, res, next) => {
         ...req.body // '...' is used to copy all elements from 'req.body'
     });
     thing.save() // return a Promise
-        .then(() => res.status(201).json({ message: 'Object saved'}))
-        .catch(() => res.status(400).json({error}))
+        .then(() => res.status(201).json({ message: 'Object saved' }))
+        .catch(() => res.status(400).json({ error }))
 };
 
 exports.getThing = (req, res, next) => {
-    Thing.findOne({_id: req.params.id})
+    Thing.findOne({ _id: req.params.id })
         .then(thing => res.status(200).json(thing))
         .catch(error => res.status(400).json({ error }))
 };
 
 exports.updateThing = (req, res, next) => {
-    Thing.updateOne({_id: req.params.id}, {...req.body, _id: req.params.id})
-        .then(() => res.status(200).json({ message : 'Object updated'}))
-        .catch(() => res.status(400).json({error}));
+    Thing.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+        .then(() => res.status(200).json({ message: 'Object updated' }))
+        .catch(() => res.status(400).json({ error }));
 };
 
 exports.deleteThing = (req, res, next) => {
-    Thing.deleteOne({_id: req.params.id})
-        .then(() => res.status(200).json({message: 'Object deleted'}))
+    // find it and check if it s the right auth
+    Thing.findOne({ _id: req.params.id })
+        .then(
+            (thing) => {
+                if (!thing) {
+                    res.error(404).json({ error: new Error('No such Thing') });
+                }
+                if (thing.userId !== req.auth.userId) {
+                    res.status(404).json({ error: new Error('Unauthorized request') });
+                }
+            }
+        )
+
+    // delete it
+    Thing.deleteOne({ _id: req.params.id })
+        .then(() => res.status(200).json({ message: 'Object deleted' }))
         .catch(() => res.status(400).json({ error }));
 };
 
