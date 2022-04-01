@@ -30,10 +30,17 @@ npm run start
 #### Backend
 - In backend folder, to
     * permit to not relaunch server at any updates
-    * install express, mongoose, mongoose unique validator, bcrypt, [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), [multer](https://www.npmjs.com/package/multer)
+    * install nodemon
+    * install all dependencies : 
+        -express
+        -mongoose
+        -mongoose unique validator
+        -bcrypt
+        -[jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+        -[multer](https://www.npmjs.com/package/multer)
     * run server
 ```
 npm install -g nodemon
-npm install express mongoose mongoose-unique-validator bcrypt jsonwebtoken multer
+npm install
 nodemon server
 ```
