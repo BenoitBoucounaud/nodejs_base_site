@@ -32,12 +32,12 @@ npm run start
     * permit to not relaunch server at any updates
     * install nodemon
     * install all dependencies : 
-        -express
-        -mongoose
-        -mongoose unique validator
-        -bcrypt
-        -[jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
-        -[multer](https://www.npmjs.com/package/multer)
+        - express
+        - mongoose
+        - mongoose unique validator
+        - bcrypt
+        - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+        - [multer](https://www.npmjs.com/package/multer)
     * run server
 ```
 npm install -g nodemon
